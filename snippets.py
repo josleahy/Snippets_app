@@ -19,11 +19,11 @@ def put(name, snippet):
     return name, snippet
 
 def get(name):
-    logging.error("Retreiving snippet {!r}".format(name,))
+    logging.info("Retreiving snippet {!r}".format(name,))
     cursor = connection.cursor()
-    command = "select keyword, message from snippets where keyword = (%s)".format(name)
+    command = "select keyword, message from snippets where keyword = (%s)".format(name,)
     cursor.execute(command, (name,))
-    connection.commit()
+    row = cursor.fetchone()
     logging.debug("Snippet retrieved successfully.")
     return name
 
